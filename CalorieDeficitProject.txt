@@ -1,0 +1,117 @@
+
+package com.company;
+import java.util.Scanner;
+
+public class CalDef {
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        String gender = "";
+        char routine = ' ';
+        double weightP;
+        double weightKg;
+        double heightIn;
+        double heightCm;
+        double age;
+        double bmr = 0;
+        double tdee = 0;
+        double weightLoss;
+        double totalDays;
+        double calTotal;
+        double calDeficit;
+        double dailyCal;
+        int i;
+
+
+        System.out.println("Today I will calculate your TDEE");
+        System.out.println("A TDEE is your total daily energy expenditure, or the number of calories ");
+        System.out.println("your body burns naturally each day.");
+        System.out.println("Once we determine your TDEE, we will be able to calculate your ");
+        System.out.println("recommended calorie deficit to lose any amount of weight you desire ");
+        System.out.println("in a specified amount of time.");
+        System.out.println(" ");
+        System.out.println("LETS GET STARTED");
+        System.out.println("");
+
+
+        System.out.println("Enter your weight:");
+        weightP = keyboard.nextDouble();
+        System.out.println("Enter your height in inches:");
+        heightIn = keyboard.nextDouble();
+        System.out.println("Enter your age:");
+        age = keyboard.nextDouble();
+        System.out.println("Are you female or male?");
+        gender = keyboard.next();
+
+        weightKg = 0.454 * weightP;
+        heightCm = 2.54 * heightIn;
+
+
+        // For women: BMR = 10 x weight (kg) + 6.25 x height (cm) – 5 x age (years) – 161
+        // For men: BMR = 10 x weight (kg) + 6.25 x height (cm) – 5 x age (years) + 5
+        if (gender.equals("female")) {
+            bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+            System.out.println();
+        }
+        else if (gender.equals("male")) {
+            bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
+
+
+        } else if (gender.equals("Female")) {
+            bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+
+
+        } else if (gender.equals("Male")) {
+            bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
+
+        } else {
+            System.out.println("ERROR: You must enter 'male', 'Male', 'MALE', 'female', 'Female', or 'FEMALE'.");
+        }
+
+        System.out.println("Which of the following describes you? ENTER A, B, C, or D (case sensitive)");
+        System.out.println("A. Very Active B. Moderately Active C. Lightly Active D. Non-Active");
+        routine = keyboard.next().charAt(0);
+
+        if (routine == 'A') {
+            tdee = bmr * 1.725;
+        }
+        else if (routine == 'B') {
+            tdee = bmr * 1.55;
+        }
+        else if (routine == 'C') {
+            tdee = bmr * 1.375;
+        }
+        else if (routine == 'D') {
+            tdee = bmr * 1.2;
+        }
+        else {
+            System.out.println("Please enter A, B, C, or D next time.");
+        }
+        System.out.println("Your TDEE is " + tdee + " and your BMR is " + bmr);
+
+        System.out.println("");
+        System.out.println("Now you know your TDEE. Remember, to lose weight, ");
+        System.out.println("you must consume less calories than your TDEE.");
+        System.out.println("");
+        System.out.println("Enter how much weight you would like to lose:");
+        weightLoss = keyboard.nextDouble();
+        System.out.println("Enter when you'd like to reach your goal weight (days total):");
+        totalDays = keyboard.nextDouble();
+
+        calTotal = weightLoss * 3500;
+        calDeficit = calTotal / totalDays;
+        dailyCal = tdee - calDeficit;
+
+        if (dailyCal < 800) {
+            System.out.println("Your calorie consumption is " + dailyCal + " calories. This is too low, unrealistic, and unsafe.");
+        }
+
+        else {
+            System.out.println("To lose " + weightLoss + " pounds in " + totalDays + " days. You need to consume " + dailyCal + " calories per day.");
+            System.out.println("QUICK TIP: If you think that consuming " + dailyCal + " calories is too low, " );
+            System.out.println("consume more calories, and burn them off through exercising to even it out. For example, ");
+            System.out.println("if you want an extra 200 calories because you're hungry, go on a run later and aim to burn 200 more calories.");
+
+        }
+    }
+    }
